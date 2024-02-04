@@ -12,8 +12,8 @@ int julia_study(double x, double y, double cx, double cy, t_fractal *fractal)
 	int			i;
 
 	i = 0;
-	fractal->zx = map(x,-2, 2, 1079);
-	fractal->zy = map(y,-2, 2, 1079);
+	fractal->zx = map(x,-2, 2, 1079) + fractal->offset_x;
+	fractal->zy = map(y,-2, 2, 1079) + fractal->offset_y;
 	fractal->cx = cx;
 	fractal->cy = cy;
 	while(i < fractal->max_iter)

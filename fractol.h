@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:38:43 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/04 13:39:10 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/04 13:51:18 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <math.h>
 #include <mlx.h>
 #include <stdio.h>
+
+#define MANDELBROT 1
+#define JULIA 2
 
 typedef struct s_fractal
 {
@@ -44,4 +47,5 @@ int	ft_atof(const char *str);
 void	my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color);
 void render_to_window_mandelbrot(int x,int y,t_fractal *fractal);
 void	window_actions(t_fractal *fractal);
+void render_to_window_julia(int x,int y,t_fractal *fractal);
 #endif

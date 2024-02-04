@@ -16,7 +16,10 @@ int	key_func(int keycode, t_fractal *fractal)
 		fractal->offset_y -= 0.5;
 	else if (keycode == 53)
 		exit(0);
-	render_to_window_mandelbrot(0, 0, fractal);
+	if (fractal->mandelbrot_vs_julia == MANDELBROT)
+		render_to_window_mandelbrot(0, 0, fractal);
+	else if (fractal->mandelbrot_vs_julia == JULIA)
+		render_to_window_julia(0, 0, fractal);
 	return (0);
 }
 
@@ -59,7 +62,7 @@ void render_to_window_mandelbrot(int x,int y,t_fractal *fractal)
 	mlx_put_image_to_window(fractal->init, fractal->window, fractal->img, 0, 0);
 }
 
-void render_to_window_julia(int x,int y,t_fractal *fractal, char **av)
+void render_to_window_julia(int x,int y,t_fractal *fractal)
 {
 	int i;
 	int red;
@@ -71,7 +74,7 @@ void render_to_window_julia(int x,int y,t_fractal *fractal, char **av)
 		y = 0;
 		while (y < 1080)
 		{
-			i = julia_study(x, y, atof(av[2]), atof(av[3]), fractal);
+			i = julia_study(x, y, fractal->cx, fractal->cy, fractal);
 			if (i == fractal->max_iter)
 				my_mlx_pixel_put(fractal, x, y, 0x000000);
 			else
@@ -120,14 +123,18 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	if (ac == 2 && ft_strcmp(av[1], "mandelbrot") == 0)
 	{
+		fractal.mandelbrot_vs_julia = MANDELBROT;
 		init_rendering(&fractal, "Mandelbrot");
 		render_to_window_mandelbrot(0, 0, &fractal);
 		window_actions(&fractal);
 	}
 	else if (ac == 4 && ft_strcmp(av[1], "julia") == 0)
 	{
+		fractal.cx = atof(av[2]);
+		fractal.cy = atof(av[3]);
+		fractal.mandelbrot_vs_julia = JULIA;
 		init_rendering(&fractal, "Julia");
-		render_to_window_julia(0, 0, &fractal, av);
+		render_to_window_julia(0, 0, &fractal);
 		window_actions(&fractal);
 	}
 }
