@@ -7,13 +7,13 @@ int	key_func(int keycode, t_fractal *fractal)
 	else if (keycode == 27)
 		fractal->iter -= 10;
 	else if (keycode == 123)
-		fractal->offset_x += 0.5;
+		fractal->offset.x += 0.2;
 	else if (keycode == 124)
-		fractal->offset_x -= 0.5;
-	else if (keycode == 126)
-		fractal->offset_y += 0.5;
+		fractal->offset.x -= 0.2;
 	else if (keycode == 125)
-		fractal->offset_y -= 0.5;
+		fractal->offset.y += 0.2;
+	else if (keycode == 126)
+		fractal->offset.y -= 0.2;
 	else if (keycode == 53)
 	{
 		mlx_destroy_image(fractal->init, fractal->img);
@@ -30,18 +30,22 @@ int	key_func(int keycode, t_fractal *fractal)
 
 int mouse_func(int button, int x, int y, t_fractal *fractal)
 {
-	if (button == MOUSE_ZOOM_IN)
-	{
-		fractal->zoom_offset_x = map(x, fractal->new_min, fractal->new_max, 600);
-		fractal->zoom_offset_y = map(y, fractal->new_min, fractal->new_max, 600);
-		fractal->zoom *= 1.1;
-	}
-	else if (button == MOUSE_ZOOM_OUT)
-	{
-		fractal->zoom_offset_x = map(x, fractal->new_min, fractal->new_max, 600);
-		fractal->zoom_offset_y = map(y, fractal->new_min, fractal->new_max, 600);
-		fractal->zoom /= 1.1;
-	}
+	double zoom;
+	int mousex;
+	int mousey;
+
+	zoom = 1;
+	mousex = map(x,fractal->start.x, fractal->end.x, 599);
+	mousey = map(y,fractal->start.y, fractal->end.y, 599);
+	if (button == 5)
+		zoom = 0.9;
+	else if (button == 4)
+		zoom = 1.1;
+	fractal->zoom = zoom;
+	fractal->start.x = (fractal->start.x - mousex) * zoom + mousex;
+	fractal->start.y = (fractal->start.y - mousey) * zoom + mousey;
+	fractal->end.x = (fractal->end.x - mousex) * zoom + mousex;
+	fractal->end.y = (fractal->end.y - mousey) * zoom + mousey;
 	if (fractal->mandelbrot_vs_julia == MANDELBROT)
 		render_to_window_mandelbrot(0, 0, fractal);
 	else if (fractal->mandelbrot_vs_julia == JULIA)
@@ -57,18 +61,18 @@ void	init_rendering(t_fractal *fractal ,char *name)
 	fractal->addr = mlx_get_data_addr(fractal->img, &fractal->bits_per_pixel, &fractal->line_length,
 	&fractal->endian);
 	fractal->iter = 1;
-	fractal->offset_x = 0.0;
-	fractal->offset_y = 0.0;
+	fractal->offset.x = 0.0;
+	fractal->offset.y = 0.0;
 	fractal->zoom = 1.0;
-	fractal->zoom_offset_x = 0.0;
-	fractal->zoom_offset_y = 0.0;
-	fractal->new_max = 2.0;
-	fractal->new_min = -2.0;
+	fractal->start.x = -2;
+	fractal->end.x = 2;
+	fractal->start.y = 2;
+	fractal->end.y = -2;
 }
 
 void	window_actions(t_fractal *fractal)
 {
-	mlx_hook(fractal->window, fractal->new_max, 0, key_func, fractal);
+	mlx_hook(fractal->window, 2, 0, key_func, fractal);
 	mlx_hook(fractal->window, 4, 0, mouse_func, fractal);
 	mlx_loop(fractal->init);
 }
@@ -86,7 +90,7 @@ void render_to_window_mandelbrot(int x,int y,t_fractal *fractal)
 		while (y < 600)
 		{
 			i = mandelbrot_study(x, y, fractal);
-			if (i == 200)
+			if (i == 100)
 				my_mlx_pixel_put(fractal, x, y, 0x000000);
 			else
 			{
@@ -114,7 +118,7 @@ void render_to_window_julia(int x,int y,t_fractal *fractal)
 		y = 0;
 		while (y < 600)
 		{
-			i = julia_study(x, y, fractal->cx, fractal->cy, fractal);
+			i = julia_study(x, y, fractal->c.x, fractal->c.y, fractal);
 			if (i == 100)
 				my_mlx_pixel_put(fractal, x, y, 0x000000);
 			else
@@ -168,8 +172,8 @@ int	main(int ac, char **av)
 	}
 	else if (ac == 4 && ft_strcmp(av[1], "julia") == 0)
 	{
-		fractal.cx = atof(av[2]);
-		fractal.cy = atof(av[3]);
+		fractal.c.x = atof(av[2]);
+		fractal.c.y = atof(av[3]);
 		fractal.mandelbrot_vs_julia = JULIA;
 		init_rendering(&fractal, "Julia");
 		render_to_window_julia(0, 0, &fractal);

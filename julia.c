@@ -12,18 +12,16 @@ int julia_study(double x, double y, double cx, double cy, t_fractal *fractal)
 	int			i;
 
 	i = 0;
-	// cordx *= 0.5
-	// cordx += x;
-	fractal->zx = map(x,-2, 2, 599) * fractal->zoom + fractal->offset_x;
-	fractal->zy = map(y,-2, 2, 599) * fractal->zoom + fractal->offset_y;
-	fractal->cx = cx;
-	fractal->cy = cy;
-	while(i < 100)
+	fractal->z.x = map(x,-2, 2, 599) * fractal->zoom + fractal->offset.x;
+	fractal->z.y = map(y,-2, 2, 599) * fractal->zoom + fractal->offset.y;
+	fractal->c.x = cx;
+	fractal->c.y = cy;
+	while(i < 80)
 	{
-		tmp_real = fractal->zx;
-		fractal->zx = fractal->zx * fractal->zx - fractal->zy * fractal->zy + fractal->cx;
-		fractal->zy = 2 * tmp_real * fractal->zy + fractal->cy;
-		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4)
+		tmp_real = fractal->z.x;
+		fractal->z.x = fractal->z.x * fractal->z.x - fractal->z.y * fractal->z.y + fractal->c.x;
+		fractal->z.y = 2 * tmp_real * fractal->z.y + fractal->c.y;
+		if (fractal->z.x * fractal->z.x + fractal->z.y * fractal->z.y >= 4)
 			break ;
 		i++;
 	}
