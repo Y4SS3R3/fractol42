@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:38:43 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/04 13:51:18 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/05 10:27:57 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 #define MANDELBROT 1
 #define JULIA 2
+#define MOUSE_LEFT 1
+#define MOUSE_RIGHT 2
+#define MOUSE_ZOOM_IN 4
+#define MOUSE_ZOOM_OUT 5
 
 typedef struct s_fractal
 {
@@ -29,15 +33,20 @@ typedef struct s_fractal
 	double	zy;
 	double	offset_x;
 	double	offset_y;
+	double	zoom;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
-	int		max_iter;
+	int		iter;
 	int		endian;
 	void	*init;
 	void	*window;
 	int		mandelbrot_vs_julia;
+	double	zoom_offset_x;
+	double	zoom_offset_y;
+	double	new_min;
+	double	new_max;
 } t_fractal;
 
 int mandelbrot_study(double x, double y, t_fractal *fractal);
