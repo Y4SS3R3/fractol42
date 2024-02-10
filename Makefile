@@ -6,12 +6,12 @@
 #    By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 11:55:43 by ymassiou          #+#    #+#              #
-#    Updated: 2024/02/07 20:31:27 by ymassiou         ###   ########.fr        #
+#    Updated: 2024/02/08 15:05:17 by ymassiou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
-SRC = events.c mandelbrot.c utils.c fractol.c julia.c tricorn.c custom_atof.c utils_2.c
+SRC = events.c mandelbrot.c utils.c fractol.c julia.c tricorn_bonus.c custom_atof.c utils_2.c
 OBJS = $(SRC:%.c=%.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra

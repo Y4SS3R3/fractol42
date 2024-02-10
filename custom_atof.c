@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:15:52 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/07 20:32:12 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:40:59 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static long	ft_atoi(const char *str, int *sign)
 	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		n = n * 10 + (str[i++] - 48);
+	if ((*sign > 0 && n > INT_MAX) || (*sign < 0 && n > INT_MAX))
+		error_msg(1);
 	return (n);
 }
 
-double custom_atof(char *str)
+double	custom_atof(char *str)
 {
 	size_t	i;
 	double	ne;
@@ -46,7 +48,7 @@ double custom_atof(char *str)
 	if (!check_input(str))
 		error_msg(1);
 	ne = ft_atoi(str, &sign);
-	while(str[i] != '.' && str[i])
+	while (str[i] != '.' && str[i])
 		i++;
 	if (!str[i])
 		return (ne * sign);

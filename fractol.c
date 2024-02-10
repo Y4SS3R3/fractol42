@@ -1,9 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/08 14:51:36 by ymassiou          #+#    #+#             */
+/*   Updated: 2024/02/08 22:10:50 by ymassiou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-static void window_runing(t_fractal *fractal, char *name)
+static void	window_runing(t_fractal *fractal, char *name)
 {
 	init_rendering(fractal, name);
-	render_to_window_mandelbrot(0, 0, fractal);
+	if (*name == 'M')
+		render_to_window_mandelbrot(-1, -1, fractal);
+	else if (*name == 'J')
+		render_to_window_julia(-1, -1, fractal);
+	else if (*name == 'T')
+		render_to_window_tricorn(-1, -1, fractal);
 	window_actions(fractal);
 }
 
@@ -12,7 +29,7 @@ int	main(int ac, char **av)
 	t_fractal	fractal;
 
 	if (ac < 2)
-		exit(EXIT_FAILURE);
+		error_msg(1);
 	if (ac == 2 && ft_strcmp(av[1], "mandelbrot") == 0)
 	{
 		fractal.fractal = MANDELBROT;
