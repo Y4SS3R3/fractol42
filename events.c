@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:44:37 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/08 21:04:08 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:39:24 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	ft_close_window(t_fractal *fractal)
 int	key_func(int keycode, t_fractal *fractal)
 {
 	if (keycode == SPACE)
-		fractal->iter += 10;
-	if (keycode == PLUS)
-		fractal->iter_max += 5;
-	if (keycode == ENTER)
-		ft_requiem(fractal);
+		fractal->iter += 5;
 	else if (keycode == MINUS)
 		fractal->iter_max -= 5;
+	else if (keycode == PLUS)
+		fractal->iter_max += 5;
+	else if (keycode == ENTER)
+		ft_requiem(fractal);
 	else if (keycode == LEFT)
-		fractal->offset.x += 0.2 * fractal->zoom;
-	else if (keycode == RIGHT)
 		fractal->offset.x -= 0.2 * fractal->zoom;
+	else if (keycode == RIGHT)
+		fractal->offset.x += 0.2 * fractal->zoom;
 	else if (keycode == UP)
 		fractal->offset.y += 0.2 * fractal->zoom;
 	else if (keycode == DOWN)
@@ -57,8 +57,8 @@ int	mouse_func(int button, int x, int y, t_fractal *fractal)
 
 	if (button == MOUSE_ZOOM_IN || button == MOUSE_ZOOM_OUT)
 	{
-		mousex = map(x, fractal->start.x, fractal->end.x, 599);
-		mousey = map(y, fractal->start.y, fractal->end.y, 599);
+		mousex = map(x, fractal->start.x, fractal->end.x, WIDTH - 1);
+		mousey = map(y, fractal->start.y, fractal->end.y, HEIGHT - 1);
 		if (button == MOUSE_ZOOM_IN)
 			zoom = 0.8;
 		else

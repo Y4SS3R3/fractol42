@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:28:35 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/08 22:54:18 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:09:51 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	ft_putstr_fd(char *s, int fd)
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-	{
 		return (1);
-	}
 	return (0);
 }
 

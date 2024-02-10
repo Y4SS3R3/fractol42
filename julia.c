@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:56:03 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 09:39:15 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:39:55 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	julia_study(double x, double y, t_fractal *fractal)
 	double		tmp_real;
 	int			i;
 
+	if (fractal->iter_max > 200)
+		fractal->iter_max = 200;
 	i = 0;
 	fractal->z.x = map(x, fractal->start.x, fractal->end.x, WIDTH - 1);
 	fractal->z.x += fractal->offset.x;

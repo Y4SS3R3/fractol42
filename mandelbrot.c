@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:02:25 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/08 22:29:45 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:39:28 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	mandelbrot_study(double x, double y, t_fractal *fractal)
 	int			i;
 
 	i = 0;
+	if (fractal->iter_max > 200)
+		fractal->iter_max = 200;
 	fractal->z.x = 0.0;
 	fractal->z.y = 0.0;
 	fractal->c.x = map(x, fractal->start.x, fractal->end.x, WIDTH - 1);

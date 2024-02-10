@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:38:43 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/08 21:44:04 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:23:21 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <math.h>
 # include <limits.h>
 # include <mlx.h>
-# include <stdio.h>
 
 # define MANDELBROT 1
 # define JULIA 2
@@ -81,7 +80,7 @@ void	window_actions(t_fractal *fractal);
 void	init_rendering(t_fractal *fractal, char *name);
 size_t	ft_strcmp(char *s1, char *s2);
 void	ft_requiem(t_fractal *fractal);
-void	error_msg(int flag);
+void	error_msg(void);
 int		ft_isdigit(int c);
 int		check_input(char *str);
 int		ft_check(char c);

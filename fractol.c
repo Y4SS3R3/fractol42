@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:51:36 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/08 22:10:50 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:22:23 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	t_fractal	fractal;
 
 	if (ac < 2)
-		error_msg(1);
+		error_msg();
 	if (ac == 2 && ft_strcmp(av[1], "mandelbrot") == 0)
 	{
 		fractal.fractal = MANDELBROT;
@@ -48,5 +48,5 @@ int	main(int ac, char **av)
 		window_runing(&fractal, "Tricorn");
 	}
 	else
-		error_msg(1);
+		error_msg();
 }

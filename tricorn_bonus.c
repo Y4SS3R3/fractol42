@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:00:57 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/08 22:48:55 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:39:28 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	tricorn_study(double x, double y, t_fractal *fractal)
 	double		tmp_real;
 	int			i;
 
+	if (fractal->iter_max > 200)
+		fractal->iter_max = 200;
 	i = 0;
 	fractal->z.x = 0.0;
 	fractal->z.y = 0.0;

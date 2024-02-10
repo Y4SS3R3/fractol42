@@ -6,20 +6,19 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:41:15 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 09:40:42 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:22:49 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	error_msg(int flag)
+void	error_msg(void)
 {
 	ft_putstr_fd("Available fractals :\n", 1);
 	ft_putstr_fd("\t=> mandelbrot <=\n\n", 1);
 	ft_putstr_fd("\t=> julia (2 additionnal parametres) <=\n\n", 1);
 	ft_putstr_fd("\t=> tricorn <=\n", 1);
-	if (flag == 1)
-		exit(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 double	map(double unscaled_num, double new_min, double new_max, double old_max)
