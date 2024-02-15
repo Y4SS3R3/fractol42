@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:41:15 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 18:22:49 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:14:52 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	error_msg(void)
 {
-	ft_putstr_fd("Available fractals :\n", 1);
-	ft_putstr_fd("\t=> mandelbrot <=\n\n", 1);
-	ft_putstr_fd("\t=> julia (2 additionnal parametres) <=\n\n", 1);
-	ft_putstr_fd("\t=> tricorn <=\n", 1);
+	ft_putstr_fd("Available fractals :\n", 2);
+	ft_putstr_fd("\t=> mandelbrot <=\n\n", 2);
+	ft_putstr_fd("\t=> julia (2 additionnal parametres) <=\n\n", 2);
+	ft_putstr_fd("\t=> tricorn <=\n", 2);
 	exit(EXIT_FAILURE);
 }
 
-double	map(double unscaled_num, double new_min, double new_max, double old_max)
+double	scale_it(double unscaled_num, double new_min,
+			double new_max, double old_max)
 {
 	return ((new_max - new_min) * unscaled_num / old_max + new_min);
 }
@@ -55,7 +56,7 @@ void	my_mlx_pixel_put(t_fractal *fractal, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = fractal->addr;
-	dst += (y * fractal->line_length + x * (fractal->bits_per_pixel / 8));
+	dst = fractal->addr + (y * fractal->line_length + x
+			* (fractal->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }

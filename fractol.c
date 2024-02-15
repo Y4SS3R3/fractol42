@@ -6,11 +6,20 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:51:36 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 18:22:23 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:13:34 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	valid_dimensions(int dimension, char c)
+{
+	if (c == 'W' && (dimension <= 0 || dimension > 2560))
+		return (0);
+	if (c == 'H' && (dimension <= 0 || dimension > 1440))
+		return (0);
+	return (1);
+}
 
 static void	window_runing(t_fractal *fractal, char *name)
 {
@@ -29,6 +38,8 @@ int	main(int ac, char **av)
 	t_fractal	fractal;
 
 	if (ac < 2)
+		error_msg();
+	if (!valid_dimensions(HEIGHT, 'H') || !valid_dimensions(WIDTH, 'W'))
 		error_msg();
 	if (ac == 2 && ft_strcmp(av[1], "mandelbrot") == 0)
 	{

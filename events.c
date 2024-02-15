@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:44:37 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 18:39:24 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:11:02 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_close_window(t_fractal *fractal)
 int	key_func(int keycode, t_fractal *fractal)
 {
 	if (keycode == SPACE)
-		fractal->iter += 5;
+		fractal->iter += 10;
 	else if (keycode == MINUS)
 		fractal->iter_max -= 5;
 	else if (keycode == PLUS)
@@ -57,8 +57,8 @@ int	mouse_func(int button, int x, int y, t_fractal *fractal)
 
 	if (button == MOUSE_ZOOM_IN || button == MOUSE_ZOOM_OUT)
 	{
-		mousex = map(x, fractal->start.x, fractal->end.x, WIDTH - 1);
-		mousey = map(y, fractal->start.y, fractal->end.y, HEIGHT - 1);
+		mousex = scale_it(x, fractal->start.x, fractal->end.x, WIDTH - 1);
+		mousey = scale_it(y, fractal->start.y, fractal->end.y, HEIGHT - 1);
 		if (button == MOUSE_ZOOM_IN)
 			zoom = 0.8;
 		else
@@ -94,13 +94,14 @@ void	init_rendering(t_fractal *fractal, char *name)
 	fractal->window = mlx_new_window(fractal->init, WIDTH, HEIGHT, name);
 	if (fractal->window == NULL)
 	{
-		free(fractal->window);
+		mlx_destroy_window(fractal->init, fractal->window);
 		exit(EXIT_FAILURE);
 	}
 	fractal->img = mlx_new_image(fractal->init, WIDTH, HEIGHT);
 	if (fractal->img == NULL)
 	{
-		free(fractal->window);
+		mlx_destroy_image(fractal->init, fractal->img);
+		mlx_destroy_window(fractal->init, fractal->window);
 		exit(EXIT_FAILURE);
 	}
 	fractal->addr = mlx_get_data_addr(fractal->img,

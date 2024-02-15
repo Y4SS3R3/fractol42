@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:28:35 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 15:09:51 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:15:06 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_input(char *str)
 			return (0);
 		else if (ft_isdigit(str[i]) && (str[i + 1] == '+' || str[i + 1] == '-'))
 			return (0);
-		if ((str[i] == '+' || str[i] == '-') && str[i + 1] == '.')
+		if ((str[i] == '+' || str[i] == '-') && !ft_isdigit(str[i + 1]))
 			return (0);
 		if (str[i] >= '0' && str[i] <= '9')
 			count_digit++;

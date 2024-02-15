@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:00:57 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 18:39:28 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:11:02 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	tricorn_study(double x, double y, t_fractal *fractal)
 	double		tmp_real;
 	int			i;
 
-	if (fractal->iter_max > 200)
+	if (fractal->iter_max > 200 || fractal->iter_max < 0)
 		fractal->iter_max = 200;
 	i = 0;
 	fractal->z.x = 0.0;
 	fractal->z.y = 0.0;
-	fractal->c.x = map(x, fractal->start.x, fractal->end.x, WIDTH - 1);
+	fractal->c.x = scale_it(x, fractal->start.x, fractal->end.x, WIDTH - 1);
 	fractal->c.x += fractal->offset.x;
-	fractal->c.y = map(y, fractal->start.y, fractal->end.y, HEIGHT - 1);
+	fractal->c.y = scale_it(y, fractal->start.y, fractal->end.y, HEIGHT - 1);
 	fractal->c.y += fractal->offset.y;
 	while (i < fractal->iter_max)
 	{

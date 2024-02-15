@@ -6,7 +6,7 @@
 #    By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 11:55:43 by ymassiou          #+#    #+#              #
-#    Updated: 2024/02/10 16:19:00 by ymassiou         ###   ########.fr        #
+#    Updated: 2024/02/14 15:15:46 by ymassiou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
-%.o : %.c fractol.h
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c fractol.h
+	$(CC) -Wall -Wextra -Werror -c $< -o $@
 
 bonus : all
 

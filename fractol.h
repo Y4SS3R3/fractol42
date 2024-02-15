@@ -6,7 +6,7 @@
 /*   By: ymassiou <ymassiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:38:43 by ymassiou          #+#    #+#             */
-/*   Updated: 2024/02/10 18:23:21 by ymassiou         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:16:16 by ymassiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <limits.h>
 # include <mlx.h>
+# include <stdio.h>
 
 # define MANDELBROT 1
 # define JULIA 2
@@ -63,7 +64,7 @@ typedef struct s_fractal
 	t_complexe	end;
 }	t_fractal;
 
-double	map(double unscaled_num,
+double	scale_it(double unscaled_num,
 			double new_min, double new_max, double old_max);
 int		mandelbrot_study(double x, double y, t_fractal *fractal);
 int		julia_study(double x, double y, t_fractal *fractal);
